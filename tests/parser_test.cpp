@@ -1,19 +1,15 @@
 #include "parser_test.h"
 
 #include <cmath>
-#include <limits>
 #include <string>
 
 #include "flatbuffers/idl.h"
+#include "infinity_constants.h"
 #include "test_assert.h"
 
 namespace flatbuffers {
 namespace tests {
 namespace {
-
-// Shortcuts for the infinity.
-static const auto infinity_f = std::numeric_limits<float>::infinity();
-static const auto infinity_d = std::numeric_limits<double>::infinity();
 
 // Test that parser errors are actually generated.
 static void TestError_(const char *src, const char *error_substr, bool strict_json,

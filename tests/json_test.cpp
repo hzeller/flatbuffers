@@ -3,14 +3,17 @@
 #include "flatbuffers/flatbuffers.h"
 #include "flatbuffers/idl.h"
 #include "monster_test_generated.h"
-#include "monster_test_bfbs_generated.h"  
+#include "monster_test_bfbs_generated.h"
 #include "optional_scalars_generated.h"
 #include "test_assert.h"
 
 namespace flatbuffers {
 namespace tests {
 
-using namespace MyGame::Example;
+using MyGame::Example::Color;
+using MyGame::Example::Color_Red;
+using MyGame::Example::MonsterBuilder;
+using MyGame::Example::Color_Blue;
 
 // Check stringify of an default enum value to json
 void JsonDefaultTest(const std::string& tests_data_path) {

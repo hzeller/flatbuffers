@@ -1,17 +1,13 @@
-#include <limits>
-
 #include "flexbuffers_test.h"
 
 #include "flatbuffers/flexbuffers.h"
 #include "flatbuffers/idl.h"
 #include "is_quiet_nan.h"
+#include "infinity_constants.h"
 #include "test_assert.h"
 
 namespace flatbuffers {
 namespace tests {
-
-// Shortcuts for the infinity.
-static const auto infinity_d = std::numeric_limits<double>::infinity();
 
 void FlexBuffersTest() {
   flexbuffers::Builder slb(512,

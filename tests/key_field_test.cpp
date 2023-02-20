@@ -10,9 +10,13 @@
 namespace flatbuffers {
 namespace tests {
 
-using namespace keyfield::sample;
+using keyfield::sample::Grain;
+using keyfield::sample::Rice;
 
 void FixedSizedScalarKeyInStructTest() {
+  using keyfield::sample::Bar;
+  using keyfield::sample::Baz;
+
   flatbuffers::FlatBufferBuilder fbb;
   std::vector<Baz> bazs;
   uint8_t test_array1[4] = { 8, 2, 3, 0 };
@@ -44,7 +48,7 @@ void FixedSizedScalarKeyInStructTest() {
   fbb.Finish(t);
 
   uint8_t *buf = fbb.GetBufferPointer();
-  auto foo_table = GetFooTable(buf);
+  auto foo_table = keyfield::sample::GetFooTable(buf);
 
   auto sorted_baz_vec = foo_table->d();
   TEST_EQ(sorted_baz_vec->Get(0)->b(), 1);
@@ -81,6 +85,9 @@ void FixedSizedScalarKeyInStructTest() {
 }
 
 void StructKeyInStructTest() {
+  using keyfield::sample::Apple;
+  using keyfield::sample::Color;
+
   flatbuffers::FlatBufferBuilder fbb;
   std::vector<Apple> apples;
   float test_float_array1[3] = { 1.5, 2.5, 0 };
@@ -96,7 +103,7 @@ void StructKeyInStructTest() {
   auto apples_vec = fbb.CreateVectorOfSortedStructs(&apples);
   auto test_string = fbb.CreateString("TEST");
 
-  FooTableBuilder foo_builder(fbb);
+  keyfield::sample::FooTableBuilder foo_builder(fbb);
   foo_builder.add_a(1);
   foo_builder.add_c(test_string);
 
@@ -107,7 +114,7 @@ void StructKeyInStructTest() {
 
 
   uint8_t *buf = fbb.GetBufferPointer();
-  auto foo_table = GetFooTable(buf);
+  auto foo_table = keyfield::sample::GetFooTable(buf);
 
   auto sorted_apple_vec = foo_table->f();
   TEST_EQ(sorted_apple_vec->Get(0)->tag(), 1);
@@ -123,6 +130,10 @@ void StructKeyInStructTest() {
 }
 
 void NestedStructKeyInStructTest() {
+  using keyfield::sample::Fruit;
+  using keyfield::sample::Apple;
+  using keyfield::sample::Color;
+
   flatbuffers::FlatBufferBuilder fbb;
   std::vector<Fruit> fruits;
   float test_float_array1[3] = { 1.5, 2.5, 0 };
@@ -139,7 +150,7 @@ void NestedStructKeyInStructTest() {
   auto test_string = fbb.CreateString("TEST");
   auto fruits_vec = fbb.CreateVectorOfSortedStructs(&fruits);
 
-  FooTableBuilder foo_builder(fbb);
+  keyfield::sample::FooTableBuilder foo_builder(fbb);
   foo_builder.add_a(1);
   foo_builder.add_c(test_string);
   foo_builder.add_g(fruits_vec);
@@ -147,7 +158,7 @@ void NestedStructKeyInStructTest() {
   auto orc = foo_builder.Finish();
   fbb.Finish(orc);
   uint8_t *buf = fbb.GetBufferPointer();
-  auto foo_table = GetFooTable(buf);
+  auto foo_table = keyfield::sample::GetFooTable(buf);
 
   auto sorted_fruit_vec = foo_table->g();
   TEST_EQ(sorted_fruit_vec->Get(0)->b(), 3);
@@ -190,7 +201,7 @@ void FixedSizedStructArrayKeyInStructTest() {
 
   auto test_string = fbb.CreateString("TEST");
   auto grains_vec = fbb.CreateVectorOfSortedStructs(&grains);
-  FooTableBuilder foo_builder(fbb);
+  keyfield::sample::FooTableBuilder foo_builder(fbb);
   foo_builder.add_a(1);
   foo_builder.add_c(test_string);
   foo_builder.add_h(grains_vec);
@@ -198,7 +209,7 @@ void FixedSizedStructArrayKeyInStructTest() {
   auto orc = foo_builder.Finish();
   fbb.Finish(orc);
   uint8_t *buf = fbb.GetBufferPointer();
-  auto foo_table = GetFooTable(buf);
+  auto foo_table = keyfield::sample::GetFooTable(buf);
 
   auto sorted_grain_vec = foo_table->h();
   TEST_EQ(sorted_grain_vec->Get(0)->tag(), 1);

@@ -3,8 +3,6 @@
 #include "flatbuffers/stl_emulation.h"
 #include "monster_test_generated.h"
 
-using namespace MyGame::Example;
-
 struct OwnedAllocator : public flatbuffers::DefaultAllocator {};
 
 class TestHeapBuilder : public flatbuffers::FlatBufferBuilder {
